@@ -1,9 +1,11 @@
 #!/bin/bash
 
-# Garante que o script só vai ser executado por superusuário
+# Força o script a rodar apenas com permissão de super usuário. Uma outra opção ainda mais curta seria:
+# [ "$UID" -eq 0 ] || exec sudo bash "$0" "$@"
 if [[ "${UID}" -ne 0 ]]
 then
-	sudo "$0" "$@"
+	echo Você precisa dar permissões de super usuário para rodar este script
+	exec sudo bash "$0" "$@"
 fi
 
 clear
@@ -19,4 +21,3 @@ echo " "
 
 echo Destruindo todas as imagens...
 docker rmi $(docker images -a -q)
-
