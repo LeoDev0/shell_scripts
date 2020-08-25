@@ -1,10 +1,9 @@
 #!/bin/bash
 
-# Garante que o script só será executado por um usuário com privilégios root 
 if [[ "${UID}" -ne 0 ]]
 then
-	echo 'Esse script deve ser executado com permissão de super usuário (root ou sudo)' >&2
-	exit 1
+	echo Você precisa dar permissões de super usuário para rodar este script
+	exec sudo bash "$0" "$@"
 fi
 
 clear
